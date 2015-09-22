@@ -4,14 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
+
+    private ListView lvPhoneInfo;
+    private PhoneAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GetNumber.getNumber(this);
+        lvPhoneInfo = (ListView)findViewById(R.id.lvPhoneInfo);
+        adapter = new PhoneAdapter(GetNumber.lists,this);
+        lvPhoneInfo.setAdapter(adapter);
     }
 
     @Override
@@ -27,12 +34,10 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
